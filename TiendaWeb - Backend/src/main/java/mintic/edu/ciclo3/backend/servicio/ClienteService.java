@@ -8,7 +8,6 @@ import java.util.List;
 import mintic.edu.ciclo3.backend.modelo.Cliente;
 import mintic.edu.ciclo3.backend.modelo.ClienteDto;
 import mintic.edu.ciclo3.backend.modelo.Tipodocumento;
-import mintic.edu.ciclo3.backend.modelo.Usuario;
 import mintic.edu.ciclo3.backend.repositorio.ClienteRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
