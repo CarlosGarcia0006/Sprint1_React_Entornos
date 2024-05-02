@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import Login from './paginas/auth/Login';
 import Home from './paginas/Home';
 import UsuariosInfo from './paginas/Informaciones/UsuariosInfo';
-import ProveedoresInfo from './paginas/Informaciones/UsuariosInfo';
+import ProveedoresInfo from './paginas/Informaciones/ProveedoresInfo';
 
 
 function App() {

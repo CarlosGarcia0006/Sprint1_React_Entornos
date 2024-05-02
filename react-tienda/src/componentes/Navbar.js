@@ -13,11 +13,12 @@ const Navbar = () => {
                         <Link to={"/usuarios"} style={{ marginLeft: 10, border: 'none' }} className="btn btn-outline-light" target="myFrame">Usuarios</Link>
                     </li>
                     <li className="nav-item">
-                        <Link to={"/proveedores"} style={{ marginLeft: 10, border: 'none' }} className="btn btn-outline-light" target="myFrame">Clientes</Link>
+                        <Link to={"/proveedores"} style={{ marginLeft: 10, border: 'none' }} className="btn btn-outline-light"target="myFrame">Proveedores</Link>
                     </li>
                     <li className="nav-item">
-                        <Link to={"#"} style={{ marginLeft: 10, border: 'none' }} className="btn btn-outline-light"target="myFrame">Proveedores</Link>
+                        <Link to={"#"} style={{ marginLeft: 10, border: 'none' }} className="btn btn-outline-light" target="myFrame">Clientes</Link>
                     </li>
+                    
                 </ul>
             </div>
         </nav>
