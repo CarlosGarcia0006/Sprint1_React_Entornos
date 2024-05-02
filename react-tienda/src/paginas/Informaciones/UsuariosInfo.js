@@ -16,6 +16,18 @@ const UsuariosInfo = () => {
         cargarUsuarios();
     }, [])
 
+    const eliminarUsuario = async (e, idUsuario) => {
+        e.preventDefault();
+        const response = await APIInvoke.invokeDELETE(`api/usuarios/${idUsuario}`);
+        
+        if (response.id === idUsuario) {
+            alert("Borrado con exito")
+            cargarUsuarios();
+        } else {
+            alert("Ha ocurrido un error")
+        }
+    }
+
     return (
         <div classname="wrapper">
             <Navbar />
@@ -61,7 +73,10 @@ const UsuariosInfo = () => {
                                                     <td>{item.nombre}</td>
                                                     <td>{item.password}</td>
                                                     <td>{item.nombreUsuario}</td>
-                                                    <td><button>Editar</button><button>Eliminar</button></td>
+                                                    <td>
+                                                        <button type="button" className="btn btn-primary" >Editar</button>&nbsp;
+                                                        <button onClick={(e) => eliminarUsuario(e, item.id)} type="button" className="btn btn-danger">Eliminar</button>
+                                                    </td>
                                                 </tr>
                                         )
                                     }

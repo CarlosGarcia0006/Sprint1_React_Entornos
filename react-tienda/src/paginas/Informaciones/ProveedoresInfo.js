@@ -1,20 +1,35 @@
 import React, { useEffect, useState } from 'react'
 import APIInvoke from '../../utils/APIInvoke';
 import Navbar from '../../componentes/Navbar';
+import { Link } from 'react-router-dom';
 
 
 const ProveedoresInfo = () => {
-    const [usuarios, setUsuarios] = useState([]);
+    const [proveedores, setProveedores] = useState([]);
 
-    const cargarUsuarios = async () => {
+    const cargarProveedores = async () => {
         const response = await APIInvoke.invokeGET(`api/proveedor/list`);
         console.log(response);
-        setUsuarios(response);
+        setProveedores(response);
     }
 
     useEffect(() => {
-        cargarUsuarios();
+        cargarProveedores();
     }, [])
+
+    const eliminarProveedor = async (e, idProveedor) => {
+        e.preventDefault();
+        const response = await APIInvoke.invokeDELETE(`api/proveedor/${idProveedor}`);
+        
+        if (response.id === idProveedor) {
+            alert("Borrado con exito")
+            cargarProveedores();
+        } else {
+            alert("Ha ocurrido un error")
+        }
+
+        
+    }
 
     return (
         <div classname="wrapper">
@@ -25,7 +40,7 @@ const ProveedoresInfo = () => {
                     {/* Default box */}
                     <div className="card">
                         <div className="card-header">
-                            <h3 className="card-title">Proveedores</h3>
+                            <h3 className="card-title">Proveedores &nbsp; <Link to={"/proveedorCrear"} class="btn btn-success w-auto">Nuevo Proveedor</Link></h3>
                             <div className="card-tools">
                                 <button type="button" className="btn btn-tool" data-card-widget="collapse" title="Collapse">
                                     <i className="fas fa-minus" />
@@ -51,7 +66,7 @@ const ProveedoresInfo = () => {
                                 </thead>
                                 <tbody>
                                     {
-                                        usuarios.map(
+                                        proveedores.map(
                                             item =>
                                                 <tr>
                                                     <td>{item.id}</td>
@@ -60,7 +75,10 @@ const ProveedoresInfo = () => {
                                                     <td>{item.nombre}</td>
                                                     <td>{item.telefono}</td>
                                                     <td>{item.nit}</td>
-                                                    <td><button>Editar</button><button>Eliminar</button></td>
+                                                    <td>
+                                                        <button className="btn btn-primary">Editar</button>&nbsp;
+                                                        <button onClick={(e) => eliminarProveedor(e, item.id)} type="button" className="btn btn-danger">Eliminar</button>
+                                                    </td>
                                                 </tr>
                                         )
                                     }
