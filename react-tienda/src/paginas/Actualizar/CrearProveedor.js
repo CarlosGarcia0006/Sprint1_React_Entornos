@@ -41,6 +41,7 @@ const CrearProveedor = () => {
             alert("Ha ocurrido un error al crear un proveedor")
         }else{
             alert("Creacion exitosa")
+            navigate("/proveedores")
         }
 
         setProveedor({

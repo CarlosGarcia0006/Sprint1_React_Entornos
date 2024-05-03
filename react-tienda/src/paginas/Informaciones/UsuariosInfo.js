@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import APIInvoke from '../../utils/APIInvoke';
 import Navbar from '../../componentes/Navbar';
+import { Link } from 'react-router-dom';
 
 
 const UsuariosInfo = () => {
@@ -74,7 +75,7 @@ const UsuariosInfo = () => {
                                                     <td>{item.password}</td>
                                                     <td>{item.nombreUsuario}</td>
                                                     <td>
-                                                        <button type="button" className="btn btn-primary" >Editar</button>&nbsp;
+                                                    <Link to={`/editarUsuario/${item.id}`} className="btn btn-primary">Editar</Link>&nbsp;
                                                         <button onClick={(e) => eliminarUsuario(e, item.id)} type="button" className="btn btn-danger">Eliminar</button>
                                                     </td>
                                                 </tr>

@@ -76,7 +76,7 @@ const ProveedoresInfo = () => {
                                                     <td>{item.telefono}</td>
                                                     <td>{item.nit}</td>
                                                     <td>
-                                                        <button className="btn btn-primary">Editar</button>&nbsp;
+                                                        <Link to={`/editarProveedor/${item.id}`} className="btn btn-primary">Editar</Link>&nbsp;
                                                         <button onClick={(e) => eliminarProveedor(e, item.id)} type="button" className="btn btn-danger">Eliminar</button>
                                                     </td>
                                                 </tr>
