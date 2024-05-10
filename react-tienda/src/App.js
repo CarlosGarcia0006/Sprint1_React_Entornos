@@ -7,6 +7,7 @@ import ProveedoresInfo from './paginas/Informaciones/ProveedoresInfo';
 import CrearProveedor from './paginas/Actualizar/CrearProveedor';
 import EditProveedor from './paginas/Actualizar/EditProveedor';
 import EditUsuario from './paginas/Actualizar/EditUsuario';
+import Register from './paginas/auth/Register';
 
 
 function App() {
@@ -14,7 +15,8 @@ function App() {
     <Fragment>
       <Router>
         <Routes>
-          <Route path='/login' exact element={<Login/>}/>
+          <Route path='/' exact element={<Login/>}/>
+          <Route path='/registro' exact element={<Register/>}/>
           <Route path='/home' exact element={<Home/>}/>
           <Route path='/usuarios' exact element={<UsuariosInfo/>}/>
           <Route path='/proveedores' exact element={<ProveedoresInfo/>}/>
