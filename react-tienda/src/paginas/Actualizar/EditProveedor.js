@@ -63,7 +63,7 @@ const EditProveedor = () => {
 
     return (
 
-        <section className="container">
+        <section>
             <Navbar />
 
             <div className="row align-items-center mb-4">

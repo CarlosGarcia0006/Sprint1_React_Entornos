@@ -64,7 +64,6 @@ class APIInvoke {
             body: JSON.stringify(body),
             headers: {
                 'Content-Type': 'application/json',
-                'x-auth-token': bearer
             }
         }
         const url = `${config.api.baseURL}${resource}`

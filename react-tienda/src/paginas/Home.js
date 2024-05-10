@@ -3,7 +3,7 @@ import Navbar from '../componentes/Navbar';
 
 const Home = () => {
     return (
-        <div classname="wrapper">
+        <div>
             <Navbar/>
         </div>
 

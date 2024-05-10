@@ -75,19 +75,15 @@ public class UsuarioController {
 		return new ResponseEntity<>(obj,HttpStatus.OK);
     }
 
-	/*
-	 * @CrossOrigin indica desde que sitios se van a realizar peticiones
-	 */
-//	@CrossOrigin(origins = { "http://localhost:8010" })
-	@PostMapping("/loginclient") // ruta del servicio desde el front deben direccionar a esta ruta
-	public int login(@RequestBody LoginDto usuario) {
-		int responseLogin = usuarioService.login(usuario);
-		return responseLogin;
-	}
+    @PostMapping("/loginclient") // ruta del servicio desde el front deben direccionar a esta ruta
+    public int login(@RequestBody LoginDto usuario) {
+        int responseLogin = usuarioService.login(usuario);
+	return responseLogin;
+    }
 
-	@PostMapping("/login") // ruta del servicio desde el front deben direccionar a esta ruta
-	public ResponseEntity<?> loginCliente(@RequestBody LoginDto usuario) {
-		return usuarioService.ingresar(usuario);
-	}
+    @PostMapping("/login") // ruta del servicio desde el front deben direccionar a esta ruta
+    public ResponseEntity<?> loginCliente(@RequestBody LoginDto usuario) {
+        return usuarioService.ingresar(usuario);
+    }
     
 }

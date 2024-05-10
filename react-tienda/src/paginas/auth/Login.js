@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import APIInvoke from "../../utils/APIInvoke";
 import swal from "sweetalert";
@@ -30,7 +30,7 @@ const Login = () => {
   }, []);*/
 
   const Login = async () => {
-    if (password.length < 6) {
+    if (password.length < 3) {
       const msg = "La contraseña debe ser al menos de 6 caracteres.";
       swal({
         title: "Error",
@@ -49,14 +49,17 @@ const Login = () => {
     } else {
       const data = {
         nombreUsuario: usuario.nombreUsuario,
-        password: usuario.password,
-      };
-      const response = await APIInvoke.invokePOST(`/api/usuarios`, data);
-      const mensaje = response.msg;
+        password: usuario.password
+      }
+
+      
+      const response = await APIInvoke.invokePOST(`api/usuarios/login`, data);
+      const mensaje = response.Mensaje;
+
+      console.log(response)
 
       if (
-        mensaje === "El usuario no existe" ||
-        mensaje === "Contraseña incorrecta"
+        mensaje === "Alerta:Usuario o Password incorrectos"
       ) {
         const msg =
           "No fue posible iniciar la sesión verifique los datos ingresados.";
@@ -99,15 +102,14 @@ const Login = () => {
           <div className="card">
             <form onSubmit={onSubmit}>
               <div className="card-content center">
-                <img src="../../assets/css/img/MisionTIC-UIS.png" alt="" />
-                <span className="card-title">INICIAR SESSION</span>
+                <span className="card-title">INICIAR SESION</span>&nbsp;
                 <div className="row">
                   <div className="input-field col s12 m12">
                   <label htmlFor="icon_user">Usuario</label>
                     <input
                       id="icon_user"
                       type="text"
-                      name="username"
+                      name="nombreUsuario"
                       className="validate"
                       value={nombreUsuario}
                       onChange={onChange}
@@ -118,7 +120,7 @@ const Login = () => {
                   <label htmlFor="icon_pass">Contraseña</label>
                     <input
                       id="icon_pass"
-                      type="password"
+                      type="text"
                       name="password"
                       className="validate"
                       value={password}
@@ -147,12 +149,7 @@ const Login = () => {
                 </div>
               </div>
             </form>
-            <div className="card-reveal">
-              <span className="card-title grey-text text-darken-4">
-                Por el momento no esta disponible
-                <i className="material-icons right">close</i>
-              </span>
-            </div>
+            
           </div>
         </div>
       </div>
