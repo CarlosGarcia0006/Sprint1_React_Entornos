@@ -1,21 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import APIInvoke from "../../utils/APIInvoke";
 import swal from "sweetalert";
 import "../../assets/css/login.css";
 import "../../assets/css/style.css";
 
 const Register = () => {
+
+  const navigate = useNavigate();
+
   const [usuario, setUsuario] = useState({
     nombre: "",
     nombreUsuario: "",
     password: "",
     email: "",
-    tipodoc: "" /*No estoy muy segura de este*/,
+    idTipoDocumento: "" /*No estoy muy segura de este*/,
     numeroDocumento: "",
   });
 
-  const { nombre, nombreUsuario, password, email, tipodoc, numeroDocumento } =
+  const { nombre, nombreUsuario, password, email, idTipoDocumento, numeroDocumento } =
     usuario;
 
   const onChange = (e) => {
@@ -48,18 +51,19 @@ const Register = () => {
       });
     } else {
       const data = {
-        nombre: usuario.nombre,
-        nombreUsuario: usuario.nombreUsuario,
-        password: usuario.password,
-        email: usuario.email,
-        tipodoc: usuario.tipodoc /*No estoy muy segura de este*/,
+        idTipoDocumento: parseInt(usuario.idTipoDocumento) /*No estoy muy segura de este*/,
         numeroDocumento: usuario.numeroDocumento,
+        nombre: usuario.nombre,
+        password: usuario.password,
+        nombreUsuario: usuario.nombreUsuario,  
+        email: usuario.email,
       };
-      const response = await APIInvoke.invokePOST(`/api/usuarios`, data);
-      const mensaje = response.msg;
 
-      if (mensaje === "El usuario ya existe") {
-        const msg = "El usuario ya existe.";
+      const response = await APIInvoke.invokePOST(`api/usuarios/`, data);
+      const verificar = response.id;
+
+      if (verificar === "") {
+        const msg = "El usuario no se ha podido crear";
         swal({
           title: "Error",
           text: msg,
@@ -91,12 +95,14 @@ const Register = () => {
           },
         });
 
+        navigate("/home");
+
         setUsuario({
           nombre: "",
           nombreUsuario: "",
           password: "",
           email: "",
-          tipodoc: "" /*No estoy muy segura de este*/,
+          idTipoDocumento: "" /*No estoy muy segura de este*/,
           numeroDocumento: "",
         });
       }
@@ -141,7 +147,7 @@ const Register = () => {
                     <input
                       id="icon_user"
                       type="text"
-                      name="username"
+                      name="nombreUsuario"
                       className="validate"
                       value={nombreUsuario}
                       onChange={onChange}
@@ -183,9 +189,9 @@ const Register = () => {
                     <label>
                       <input
                         type="radio"
-                        name="tipodoc"
-                        value="CC"
-                        checked={tipodoc === "CC"}
+                        name="idTipoDocumento"
+                        value="5"
+                        checked={idTipoDocumento === "5"}
                         onChange={onChange}
                       />
                       <span>Cédula de Ciudadanía (CC)</span>
@@ -197,9 +203,9 @@ const Register = () => {
                     <label>
                       <input
                         type="radio"
-                        name="tipodoc"
-                        value="TI"
-                        checked={tipodoc === "TI"}
+                        name="idTipoDocumento"
+                        value= "6"
+                        checked={idTipoDocumento === "6"}
                         onChange={onChange}
                       />
                       <span>Tarjeta de Identidad (TI)</span>
@@ -211,9 +217,9 @@ const Register = () => {
                   <div className="input-field col s12">
                     <label htmlFor="numDocumento">Número de Documento</label>
                     <input
-                      id="numDocumento"
+                      id="numeroDocumento"
                       type="text"
-                      name="doc"
+                      name="numeroDocumento"
                       className="validate"
                       value={numeroDocumento}
                       onChange={onChange}
